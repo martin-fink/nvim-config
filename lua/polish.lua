@@ -12,3 +12,13 @@ for _, mode in ipairs { "n", "x" } do
 end
 vim.keymap.set("i", "<Down>", "<C-o>gj", { silent = true })
 vim.keymap.set("i", "<Up>", "<C-o>gk", { silent = true })
+
+-- Soft-wrap prose files at word boundaries
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function()
+    vim.opt_local.wrap = true
+    vim.opt_local.linebreak = true
+    vim.opt_local.breakindent = true
+  end,
+})
